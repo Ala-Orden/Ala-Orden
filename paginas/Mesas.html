@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/LogoAlaOrdenSolo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/mesa.css">
+    <link rel="stylesheet" href="../CSS/mess.css">
+    <script src="https://kit.fontawesome.com/a01a75bbd0.js" crossorigin="anonymous"></script>
+    <title>Mesas</title>
+    <meta name="theme-color" content="#202020">
+</head>
+
+<body>
+    <header>
+        <nav class="contenedor">
+            <div class="logo">
+                <img src="../images/LogoAlaOrdenLetras.png" alt="" onclick="location.href='../paginas/empleados.html';">
+            </div>
+            <div class="enlaces">
+                <a href="../paginas/empleados.html"><i class="fa-solid fa-house"></i>Inicio</a>
+                <a href="../paginas/Menu_Em.html"><i class="fa-solid fa-utensils"></i>Menú</a>
+                <a href="../paginas/reservas.html"><i class="fa-solid fa-calendar-days"></i>Reservaciones</a>
+                <a href="../paginas/Mesas.html"><i class="fa-sharp fa-solid fa-address-card"></i>Mesas</a>
+                <a href="../index.html"><i class="fa-solid fa-user-tie"></i>Cerrar</a>
+            </div>
+            <div class="hamburguesa">
+                <img src="../images/menu-regular-24.png" id="hamburguesa">
+            </div>
+        </nav>
+    </header><br><br><br><br><br><br><br>
+
+    
+    <div class="socialbar">
+        <a href="https://www.facebook.com/OficialUTN" class="iconface" target="_blank"><img src="../images/socialface.png" class="icosociales"></a>
+        <a href="https://api.whatsapp.com/send?phone=5621130076&text=¡Hola!%20¿me%20podrian%20ayudar?" class="iconwatts" target="_blank"><img src="../images/socialwatt.png" class="icosociales"></a>
+        <a href="mailto:alaordenAO@gmail.com" class="iconemail" target="_blank"><img src="../images/socialemail.png" class="icosociales"></a>
+        
+    </div>
+
+    
+        <div id="main">
+            <div class="demo">
+                <div id="seat-map">
+                    <div class="front">Mesas</div>
+                </div>
+                <div class="booking-details">
+                    <p>Disponibles：<span>7</span></p>
+                    <p>Horarios：<span>12:00/21:00hrs</span></p>
+                    <p>Reservados：<span>5</span></p>
+                    <p>Personas：<span id="counter">0</span></p>
+                    <button class="checkout-button"><a href="../paginas/empleados.html">Confirmar</a></button>
+                    <div id="legend" class="seatCharts-legend"></div>
+                <div style="clear:both"></div>
+            </div><br />
+        </div><br><br><br><br><br><br>
+
+    
+        <footer>
+            <div class="contenedor-footer" id="contacto">
+                <div class="content-foo">
+                    <h4>WhatsApp<i class="fa-brands fa-whatsapp"></i></h4>
+                     <a href="https://api.whatsapp.com/send?phone=57169700&text=¡Hola!%20¿me%20podrian%20ayudar?" target="_blank">56-21-13-00-76</a>
+                </div>
+                <div class="content-foo">
+                    <h4>Facebook<i class="fa-brands fa-facebook"></i></h4>
+                    <a href="https://www.facebook.com/OficialUTN" target="_blank">Ala-OrdenOficial</a>
+                </div>
+                <div class="content-foo">
+                    <h4>Email<i class="fa-solid fa-at"></i></h4>
+                    <a href="mailto:alaordenAO@gmail.com">alaordenAO@gmail.com</a>
+                </div>
+            </div>
+            <h2 class="titulo-final">® Ala-Orden | United Networks | 2022 | <a href="../paginas/politicas.html">Politica de Provacidad</a></h2>
+        </footer>
+
+    <script src="../JS/mesas.js"></script>       
+     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript" src="../JS/jquery.seat-charts.min.js"></script>
+        <script
+            type="text/javascript">var price = 70;         $(document).ready(function () { var $cart = $('#selected-seats'),             $counter = $('#counter'),             $total = $('#total'); /*总计金额*/            var sc = $('#seat-map').seatCharts({ map: [  /*座位图*/                    'aaaaaaaaaa', 'aaaaaaaaaa', '__________', 'aaaaaaaa__', 'aaaaaaaaaa', 'aaaaaaaaaa', 'aaaaaaaaaa', 'aaaaaaaaaa', 'aaaaaaaaaa', 'aa__aa__aa'], naming: { top: false, getLabel: function (character, row, column) { return column; } }, legend: { /*定义图例*/                    node: $('#legend'), items: [['a', 'available', 'Disponible'], ['a', 'unavailable', 'Reservado']] }, click: function () { /*点击事件*/                    if (this.status() == 'available') { /*可选座*/                        $('<li>' + (this.settings.row + 1) + '排' + this.settings.label + '座</li>').attr('id', 'cart-item-' + this.settings.id).data('seatId', this.settings.id).appendTo($cart); $counter.text(sc.find('selected').length + 1); $total.text(recalculateTotal(sc) + price); return 'selected'; } else if (this.status() == 'selected') { /*已选中*/                        /*更新数量*/                        $counter.text(sc.find('selected').length - 1);                        /*更新总计*/                        $total.text(recalculateTotal(sc) - price);                        /*删除已预订座位*/                        $('#cart-item-' + this.settings.id).remove();                        /*可选座*/                        return 'available'; } else if (this.status() == 'unavailable') { /*已售出*/                        return 'unavailable'; } else { return this.style(); } } });            /*已售出的座位*/            sc.get(['1_2', '4_4', '4_5', '6_6', '6_7', '8_5', '8_6', '8_7', '8_8', '10_1', '10_2']).status('unavailable'); });        /*计算总金额*/        function recalculateTotal(sc) { var total = 0; sc.find('selected').each(function () { total += price; }); return total; }</script>
+        <a style="display:none" href="http://www.bootstrapmb.com">bootstrap模板库</a>
+        
+        <script href="../JS/jquery.seat-charts.min.js"></script>
+
+</body>
+</html>
